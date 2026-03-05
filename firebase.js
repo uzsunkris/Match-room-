@@ -20,8 +20,9 @@
 
 
 //inputs
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+const signupName = document.getElementById('signup-name').value;
+const signupEmail = document.getElementById('signup-email').value;
+const signupPassword = document.getElementById('signup-password').value;
 
 //submit button
 const submit = document.getElementById('submit');
