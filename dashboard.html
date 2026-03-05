@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - MatchRoom</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase + dashboard JS -->
+<script type="module" src="firebase.js" defer></script>
+<script type="module" src="dashboard.js" defer></script>
+</head>
+<body>
+
+<section class="dashboard-container">
+    <div class="dashboard-box">
+        <!-- Greeting -->
+        <h2 id="greeting">Welcome!</h2>
+
+        <!-- Logout -->
+        <button id="logout-btn">Logout</button>
+
+        <!-- Placeholder for future live match messages/chat -->
+        <div id="live-chat" class="live-chat">
+            <p>Live match messages will appear here...</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
