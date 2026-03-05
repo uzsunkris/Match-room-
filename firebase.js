@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
-// Your Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBXzeF1LsdQxg9RcZ3KyMzWimBXKwBAyaw",
     authDomain: "match-room-a469b.firebaseapp.com",
@@ -14,4 +14,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app); // export auth so other JS files can use it
+export const auth = getAuth(app); // Export auth for use in auth.js
