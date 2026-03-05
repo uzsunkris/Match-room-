@@ -1,4 +1,6 @@
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from './firebase.js';
+// auth.js
+import { auth } from './firebase.js';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
 // Tabs
 const loginTab = document.getElementById('login-tab');
@@ -30,9 +32,9 @@ signupForm.addEventListener('submit', async (e) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        alert(`Signup successful! Welcome ${name}`);
-        // Optionally redirect user to dashboard here
+        alert(`Account created successfully! Welcome ${name}`);
         signupForm.reset();
+        // Optionally, redirect user to dashboard
     } catch (error) {
         alert(error.message);
     }
@@ -48,8 +50,8 @@ loginForm.addEventListener('submit', async (e) => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         alert(`Login successful! Welcome back ${user.email}`);
-        // Optionally redirect user to dashboard here
         loginForm.reset();
+        // Optionally, redirect user to dashboard
     } catch (error) {
         alert(error.message);
     }
