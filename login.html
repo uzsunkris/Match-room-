@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login / Signup - MatchRoom</title>
 <link rel="stylesheet" href="style.css">
 
+<!-- Firebase + Auth scripts -->
 <script type="module" src="firebase.js" defer></script>
-  
+<script type="module" src="auth.js" defer></script>
 </head>
 
 <body>
-
 <section class="auth-container">
+    <div class="auth-box">
 
-<div class="auth-box">
+        <h2>Welcome to MatchRoom</h2>
+        <p>Login or create an account to join live match rooms!</p>
 
-<h2>Welcome to MatchRoom</h2>
-<p>Login or create an account to join live match rooms!</p>
+        <!-- Tabs -->
+        <div class="tab-buttons">
+            <button id="login-tab" class="active">Login</button>
+            <button id="signup-tab">Signup</button>
+        </div>
 
-<!-- Tabs -->
-<div class="tab-buttons">
-<button id="login-tab" class="active">Login</button>
-<button id="signup-tab">Signup</button>
-</div>
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form">
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
 
-<!-- Login Form -->
-<form id="login-form" class="auth-form">
-<input type="email" id="login-email" placeholder="Email" required>
-<input type="password" id="login-password" placeholder="Password" required>
-<button type="submit">Login</button>
-</form>
+        <!-- Signup Form -->
+        <form id="signup-form" class="auth-form hidden">
+            <input type="text" id="signup-name" placeholder="Full Name" required>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit">Signup</button>
+        </form>
 
-<!-- Signup Form -->
-<form id="signup-form" class="auth-form hidden">
-<input type="text" id="signup-name" placeholder="Full Name" required>
-<input type="email" id="signup-email" placeholder="Email" required>
-<input type="password" id="signup-password" placeholder="Password" required>
-<button type="submit">Signup</button>
-</form>
-
-</div>
-
+    </div>
 </section>
-
-
 </body>
 </html>
