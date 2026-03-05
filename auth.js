@@ -22,7 +22,7 @@ signupTab.addEventListener('click', () => {
     loginForm.classList.add('hidden');
 });
 
-// Signup Form
+// Signup form submission
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = document.getElementById('signup-name').value;
@@ -31,16 +31,17 @@ signupForm.addEventListener('submit', async (e) => {
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
         alert(`Account created successfully! Welcome ${name}`);
         signupForm.reset();
-        // Optionally, redirect user to dashboard
+
+        // Redirect to index.html
+        window.location.href = "index.html";
     } catch (error) {
         alert(error.message);
     }
 });
 
-// Login Form
+// Login form submission
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
@@ -48,10 +49,11 @@ loginForm.addEventListener('submit', async (e) => {
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        alert(`Login successful! Welcome back ${user.email}`);
+        alert(`Login successful! Welcome back ${userCredential.user.email}`);
         loginForm.reset();
-        // Optionally, redirect user to dashboard
+
+        // Redirect to index.html
+        window.location.href = "index.html";
     } catch (error) {
         alert(error.message);
     }
