@@ -1,205 +1,113 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
-import { getDatabase, ref, push, onChildAdded, get, update } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+import {
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const db = getDatabase();
-
-const chatContainer = document.getElementById("chat-container");
-
-const input = document.getElementById("message-input");
-
-const sendBtn = document.getElementById("send-btn");
-
-const stickerPanel = document.getElementById("sticker-panel");
-
-const toggleStickers = document.getElementById("toggle-stickers");
-
-const coinBalance = document.getElementById("coin-balance");
-
-const urlParams = new URLSearchParams(window.location.search);
-
-const matchId = urlParams.get("match");
-
-const team = urlParams.get("team");
+import {
+collection,
+addDoc,
+query,
+orderBy,
+onSnapshot,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-let coins = 0;
+const chatBox = document.getElementById("chatMessages");
+const messageInput = document.getElementById("messageInput");
+const sendBtn = document.getElementById("sendBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
 
-// Protect page
+// GET TEAM
+const team = localStorage.getItem("team") || "A";
 
-auth.onAuthStateChanged(async user => {
+
+// AUTH CHECK
+onAuthStateChanged(auth,(user)=>{
 
 if(!user){
 
-window.location.href = "index.html";
+window.location.href="index.html";
 
-return;
+}else{
 
-}
-
-const userRef = ref(db,"users/"+user.uid);
-
-const snap = await get(userRef);
-
-if(snap.exists()){
-
-coins = snap.val().coins || 500;
-
-coinBalance.textContent = coins;
+loadMessages(user);
 
 }
-
-loadMessages();
 
 });
 
 
+// SEND MESSAGE
+sendBtn.onclick = async ()=>{
 
-// Load messages
+const text = messageInput.value.trim();
 
-function loadMessages(){
+if(text==="") return;
 
-const msgRef = ref(db,"matches/"+matchId+"/messages");
+await addDoc(collection(db,"messages"),{
 
-onChildAdded(msgRef,snapshot=>{
-
-const msg = snapshot.val();
-
-displayMessage(msg);
+text:text,
+username:auth.currentUser.email,
+team:team,
+createdAt:serverTimestamp()
 
 });
 
-}
+messageInput.value="";
+
+};
 
 
 
-// Display message
+// LOAD MESSAGES REALTIME
+function loadMessages(user){
 
-function displayMessage(msg){
+const q = query(collection(db,"messages"),orderBy("createdAt"));
+
+onSnapshot(q,(snapshot)=>{
+
+chatBox.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+const msg = doc.data();
 
 const div = document.createElement("div");
 
 div.classList.add("message");
 
 if(msg.team==="A"){
-
 div.classList.add("teamA");
-
 }else{
-
 div.classList.add("teamB");
-
 }
 
+div.innerHTML=`
 
-if(msg.type==="text"){
+<div class="username">${msg.username}</div>
+<div>${msg.text}</div>
 
-div.innerText = msg.username+": "+msg.text;
+`;
 
-}
+chatBox.appendChild(div);
 
+});
 
-if(msg.type==="sticker"){
+chatBox.scrollTop = chatBox.scrollHeight;
 
-const img = document.createElement("img");
-
-img.src = msg.url;
-
-img.classList.add("sticker-msg");
-
-div.appendChild(img);
-
-}
-
-chatContainer.appendChild(div);
-
-chatContainer.scrollTop = chatContainer.scrollHeight;
+});
 
 }
 
 
 
-// Send text message
+// LOGOUT
+logoutBtn.onclick = ()=>{
 
-sendBtn.addEventListener("click",()=>{
+signOut(auth);
 
-const text = input.value.trim();
-
-if(text==="") return;
-
-const msgRef = ref(db,"matches/"+matchId+"/messages");
-
-push(msgRef,{
-
-username: auth.currentUser.email,
-
-text:text,
-
-team:team,
-
-type:"text",
-
-time:Date.now()
-
-});
-
-input.value="";
-
-});
-
-
-
-// Toggle sticker panel
-
-toggleStickers.addEventListener("click",()=>{
-
-stickerPanel.classList.toggle("show");
-
-});
-
-
-
-// Send sticker
-
-stickerPanel.addEventListener("click",async e=>{
-
-if(e.target.tagName!=="IMG") return;
-
-const price = parseInt(e.target.dataset.price);
-
-if(coins<price){
-
-alert("Not enough coins");
-
-return;
-
-}
-
-coins -= price;
-
-coinBalance.textContent = coins;
-
-await update(ref(db,"users/"+auth.currentUser.uid),{
-
-coins:coins
-
-});
-
-const msgRef = ref(db,"matches/"+matchId+"/messages");
-
-push(msgRef,{
-
-username:auth.currentUser.email,
-
-url:e.target.src,
-
-team:team,
-
-type:"sticker",
-
-time:Date.now()
-
-});
-
-});
+};
