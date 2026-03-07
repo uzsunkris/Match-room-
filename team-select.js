@@ -1,44 +1,76 @@
-// team-select.js
-import { auth, db } from './firebase.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
-import { ref, set } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
 
-const matchNameElem = document.getElementById('match-name');
-const teamABtn = document.getElementById('team-a-btn');
-const teamBBtn = document.getElementById('team-b-btn');
+const db = getDatabase();
 
-// Protect page
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-  } else {
-    const matchName = localStorage.getItem('currentMatchName');
-    matchNameElem.innerText = matchName || "Unknown Match";
-  }
-});
+const urlParams = new URLSearchParams(window.location.search);
 
-// Save team choice and redirect to chat
-function chooseTeam(team) {
-  const matchId = localStorage.getItem('currentMatchId');
-  const userId = auth.currentUser.uid;
+const matchId = urlParams.get("match");
 
-  // Save user's team for this match
-  set(ref(db, `matches/${matchId}/teams/${userId}`), {
-    team: team,
-    name: auth.currentUser.displayName || "Anonymous"
-  });
+const teamAButton = document.getElementById("teamA");
 
-  localStorage.setItem('userTeam', team);
+const teamBButton = document.getElementById("teamB");
 
-  window.location.href = "chat.html";
+const title = document.getElementById("match-title");
+
+
+// Load match data
+async function loadMatch(){
+
+const matchRef = ref(db,"matches/"+matchId);
+
+const snapshot = await get(matchRef);
+
+if(snapshot.exists()){
+
+const match = snapshot.val();
+
+title.innerText = match.teamA + " vs " + match.teamB;
+
+teamAButton.innerText = match.teamA;
+
+teamBButton.innerText = match.teamB;
+
 }
 
-teamABtn.addEventListener('click', () => chooseTeam('A'));
-teamBBtn.addEventListener('click', () => chooseTeam('B'));
-teamBBtn.addEventListener('click', () => chooseTeam('B'));
-teamBBtn.addEventListener('click', () => chooseTeam('B'));
-teamABtn.addEventListener('click', () => chooseTeam('A'));
-teamBBtn.addEventListener('click', () => chooseTeam('B'));
-teamBBtn.addEventListener('click', () => chooseTeam('B'));
-teamABtn.addEventListener('click', () => chooseTeam('A'));
-teamBBtn.addEventListener('click', () => chooseTeam('B'));
+}
+
+loadMatch();
+
+
+// Team selection
+async function chooseTeam(team){
+
+const matchRef = ref(db,"matches/"+matchId);
+
+const snapshot = await get(matchRef);
+
+if(!snapshot.exists()) return;
+
+const match = snapshot.val();
+
+const now = Date.now();
+
+if(match.status === "live" || now >= match.startTime){
+
+window.location.href = `chat.html?match=${matchId}&team=${team}`;
+
+}else{
+
+window.location.href = `waiting.html?match=${matchId}&team=${team}`;
+
+}
+
+}
+
+
+teamAButton.addEventListener("click",()=>{
+
+chooseTeam("A");
+
+});
+
+teamBButton.addEventListener("click",()=>{
+
+chooseTeam("B");
+
+});
