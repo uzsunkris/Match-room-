@@ -1,63 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Match Chat</title>
+<title>MatchRoom Chat</title>
 
 <link rel="stylesheet" href="chat.css">
-
-<script type="module" src="firebase.js"></script>
-
-<script type="module" src="chat.js"></script>
 
 </head>
 
 <body>
 
-<header class="chat-header">
+<header class="top-bar">
 
-<h2 id="match-name">Match Chat</h2>
-
-<div class="coins">
-
-Coins: <span id="coin-balance">0</span>
-
+<div class="logo">
+⚽ MatchRoom
 </div>
+
+<div class="match-info">
+<span id="teamAName">Team A</span>
+vs
+<span id="teamBName">Team B</span>
+</div>
+
+<button id="logoutBtn">Logout</button>
 
 </header>
 
 
-<div id="chat-container" class="chat-container"></div>
+<section class="chat-container">
+
+<div id="chatMessages" class="chat-messages"></div>
+
+</section>
 
 
-<footer class="chat-footer">
+<div class="message-box">
 
-<input type="text" id="message-input" placeholder="Type message...">
+<input
+type="text"
+id="messageInput"
+placeholder="Type your message..."
+autocomplete="off"
+/>
 
-<button id="toggle-stickers">+</button>
-
-<button id="send-btn">Send</button>
-
-</footer>
-
-
-<div id="sticker-panel" class="sticker-panel">
-
-<img src="stickers/sticker1.png" data-price="10">
-
-<img src="stickers/sticker2.png" data-price="10">
-
-<img src="stickers/sticker3.png" data-price="100">
-
-<img src="stickers/sticker4.png" data-price="100">
+<button id="sendBtn">Send</button>
 
 </div>
 
-</body>
 
+<script type="module" src="chat.js"></script>
+
+</body>
 </html>
