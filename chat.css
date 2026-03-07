@@ -1,51 +1,116 @@
-.chat-container{
-height:70vh;
-overflow-y:auto;
-padding:10px;
-background:#f2f2f2;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
 }
 
-.message{
-padding:8px;
-margin:6px;
-max-width:60%;
-border-radius:8px;
-}
-
-.teamA{
-background:#d4f5d0;
-margin-right:auto;
-}
-
-.teamB{
-background:#f7c6c6;
-margin-left:auto;
-text-align:right;
-}
-
-.chat-footer{
+body{
+background:#0f0f0f;
+color:white;
+height:100vh;
 display:flex;
-gap:5px;
-padding:10px;
+flex-direction:column;
 }
 
-.sticker-panel{
-display:none;
-padding:10px;
-background:white;
-border-top:1px solid #ccc;
-}
+/* TOP BAR */
 
-.sticker-panel.show{
+.top-bar{
 display:flex;
-gap:10px;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:#121212;
+border-bottom:1px solid #2a2a2a;
 }
 
-.sticker-panel img{
-width:50px;
+.logo{
+font-size:20px;
+font-weight:bold;
+color:#00ff9d;
+}
+
+.match-info{
+font-size:16px;
+font-weight:bold;
+}
+
+#logoutBtn{
+background:#ff3b3b;
+border:none;
+padding:8px 14px;
+color:white;
+border-radius:6px;
 cursor:pointer;
 }
 
-.sticker-msg{
-width:60px;
+/* CHAT AREA */
+
+.chat-container{
+flex:1;
+overflow-y:auto;
+padding:20px;
+}
+
+.chat-messages{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+/* MESSAGE */
+
+.message{
+max-width:65%;
+padding:12px 14px;
+border-radius:12px;
+font-size:14px;
+line-height:1.4;
+}
+
+.teamA{
+background:#1e88e5;
+align-self:flex-start;
+border-bottom-left-radius:3px;
+}
+
+.teamB{
+background:#00c853;
+align-self:flex-end;
+border-bottom-right-radius:3px;
+}
+
+.username{
+font-size:12px;
+opacity:0.8;
+margin-bottom:4px;
+}
+
+/* MESSAGE INPUT */
+
+.message-box{
+display:flex;
+padding:15px;
+background:#121212;
+border-top:1px solid #2a2a2a;
+}
+
+#messageInput{
+flex:1;
+padding:12px;
+border:none;
+outline:none;
+border-radius:8px;
+background:#1e1e1e;
+color:white;
+}
+
+#sendBtn{
+margin-left:10px;
+padding:12px 20px;
+background:#00ff9d;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
 }
