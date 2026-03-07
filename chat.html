@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match Chat - MatchRoom</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="firebase.js" defer></script>
+<script type="module" src="chat.js" defer></script>
+</head>
+<body>
+
+<header class="chat-header">
+    <h2 id="match-name">Match Name</h2>
+    <div class="coins-display">Coins: <span id="coin-balance">0</span></div>
+</header>
+
+<main class="chat-container" id="chat-container">
+    <!-- Messages will appear here -->
+</main>
+
+<footer class="chat-footer">
+    <div class="input-wrapper">
+        <input type="text" id="message-input" placeholder="Type a message..." />
+        <button id="sticker-toggle">➕</button>
+        <button id="send-btn">Send</button>
+    </div>
+    <div class="sticker-panel hidden" id="sticker-panel">
+        <!-- Example stickers -->
+        <img src="stickers/happy.png" data-coin="10" class="sticker">
+        <img src="stickers/celebrate.png" data-coin="10" class="sticker">
+        <img src="stickers/premium1.png" data-coin="100" class="sticker">
+        <img src="stickers/premium2.png" data-coin="100" class="sticker">
+    </div>
+</footer>
+
+</body>
+</html>
