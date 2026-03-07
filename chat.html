@@ -1,38 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Match Chat - MatchRoom</title>
-<link rel="stylesheet" href="chat.css">
-<script type="module" src="firebase.js" defer></script>
-<script type="module" src="chat.js" defer></script>
+
+<title>Match Chat</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script type="module" src="firebase.js"></script>
+
+<script type="module" src="chat.js"></script>
+
 </head>
+
 <body>
 
 <header class="chat-header">
-    <h2 id="match-name">Match Name</h2>
-    <div class="coins-display">Coins: <span id="coin-balance">0</span></div>
+
+<h2 id="match-name">Match Chat</h2>
+
+<div class="coins">
+
+Coins: <span id="coin-balance">0</span>
+
+</div>
+
 </header>
 
-<main class="chat-container" id="chat-container">
-    <!-- Messages will appear here -->
-</main>
+
+<div id="chat-container" class="chat-container"></div>
+
 
 <footer class="chat-footer">
-    <div class="input-wrapper">
-        <input type="text" id="message-input" placeholder="Type a message..." />
-        <button id="sticker-toggle">➕</button>
-        <button id="send-btn">Send</button>
-    </div>
-    <div class="sticker-panel hidden" id="sticker-panel">
-        <!-- Example stickers -->
-        <img src="stickers/happy.png" data-coin="10" class="sticker">
-        <img src="stickers/celebrate.png" data-coin="10" class="sticker">
-        <img src="stickers/premium1.png" data-coin="100" class="sticker">
-        <img src="stickers/premium2.png" data-coin="100" class="sticker">
-    </div>
+
+<input type="text" id="message-input" placeholder="Type message...">
+
+<button id="toggle-stickers">+</button>
+
+<button id="send-btn">Send</button>
+
 </footer>
 
+
+<div id="sticker-panel" class="sticker-panel">
+
+<img src="stickers/sticker1.png" data-price="10">
+
+<img src="stickers/sticker2.png" data-price="10">
+
+<img src="stickers/sticker3.png" data-price="100">
+
+<img src="stickers/sticker4.png" data-price="100">
+
+</div>
+
 </body>
+
 </html>
