@@ -35,7 +35,7 @@ signupForm.addEventListener('submit', async (e) => {
         signupForm.reset();
 
         // Redirect to index.html
-        window.location.href = "dashboard.html";
+        window.location.href = "matches.html";
     } catch (error) {
         alert(error.message);
     }
@@ -53,7 +53,7 @@ loginForm.addEventListener('submit', async (e) => {
         loginForm.reset();
 
         // Redirect to index.html
-        window.location.href = "dashboard.html";
+        window.location.href = "matches.html";
     } catch (error) {
         alert(error.message);
     }
