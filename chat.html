@@ -3,54 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MatchRoom Chat</title>
-
 <link rel="stylesheet" href="chat.css">
-
 </head>
-
 <body>
 
 <header class="top-bar">
-
-<div class="logo">
-⚽ MatchRoom
-</div>
-
-<div class="match-info">
-<span id="teamAName">Team A</span>
-vs
-<span id="teamBName">Team B</span>
-</div>
-
-<button id="logoutBtn">Logout</button>
-
+  <div class="logo">⚽ MatchRoom</div>
+  <div class="match-info">
+    <span id="teamAName">Team A</span> vs <span id="teamBName">Team B</span>
+  </div>
+  <div class="live-info">
+    <span id="viewerCount">0</span> Fans Online | Coins: <span id="coinBalance">0</span>
+  </div>
+  <button id="logoutBtn">Logout</button>
 </header>
 
-
 <section class="chat-container">
-
-<div id="chatMessages" class="chat-messages"></div>
-
+  <div id="typingIndicator" class="typing-indicator"></div>
+  <div id="chatMessages" class="chat-messages"></div>
 </section>
 
-
-<div class="message-box">
-
-<input
-type="text"
-id="messageInput"
-placeholder="Type your message..."
-autocomplete="off"
-/>
-
-<button id="sendBtn">Send</button>
-
+<div class="sticker-panel" id="stickerPanel">
+  <img src="stickers/sticker1.png" data-price="10" title="10 coins">
+  <img src="stickers/sticker2.png" data-price="10" title="10 coins">
+  <img src="stickers/sticker3.png" data-price="100" title="100 coins">
+  <img src="stickers/sticker4.png" data-price="100" title="100 coins">
 </div>
 
+<div class="message-box">
+  <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
+  <button id="sendBtn">Send</button>
+</div>
 
 <script type="module" src="chat.js"></script>
-
 </body>
 </html>
