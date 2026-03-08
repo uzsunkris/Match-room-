@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MatchRoom Chat</title>
-<link rel="stylesheet" href="chat.css">
-</head>
-<body>
 
-<header class="top-bar">
-  <div class="logo">⚽ MatchRoom</div>
-  <div class="match-info">
-    <span id="teamAName">Team A</span> vs <span id="teamBName">Team B</span>
-  </div>
-  <div class="live-info">
-    <span id="viewerCount">0</span> Fans Online | Coins: <span id="coinBalance">0</span>
-  </div>
-  <button id="logoutBtn">Logout</button>
-</header>
+<title>Match Chat</title>
 
-<section class="chat-container">
-  <div id="typingIndicator" class="typing-indicator"></div>
-  <div id="chatMessages" class="chat-messages"></div>
-</section>
+<link rel="stylesheet" href="style.css">
 
-<div class="sticker-panel" id="stickerPanel">
-  <img src="stickers/sticker1.png" data-price="10" title="10 coins">
-  <img src="stickers/sticker2.png" data-price="10" title="10 coins">
-  <img src="stickers/sticker3.png" data-price="100" title="100 coins">
-  <img src="stickers/sticker4.png" data-price="100" title="100 coins">
-</div>
-
-<div class="message-box">
-  <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
-  <button id="sendBtn">Send</button>
-</div>
+<script type="module" src="firebase.js"></script>
 
 <script type="module" src="chat.js"></script>
+
+</head>
+
+<body>
+
+<header class="chat-header">
+
+<h2 id="match-name">Match Chat</h2>
+
+<div class="coins">
+
+Coins: <span id="coin-balance">0</span>
+
+</div>
+
+</header>
+
+
+<div id="chat-container" class="chat-container"></div>
+
+
+<footer class="chat-footer">
+
+<input type="text" id="message-input" placeholder="Type message...">
+
+<button id="toggle-stickers">+</button>
+
+<button id="send-btn">Send</button>
+
+</footer>
+
+
+<div id="sticker-panel" class="sticker-panel">
+
+<img src="stickers/sticker1.png" data-price="10">
+
+<img src="stickers/sticker2.png" data-price="10">
+
+<img src="stickers/sticker3.png" data-price="100">
+
+<img src="stickers/sticker4.png" data-price="100">
+
+</div>
+
 </body>
+
 </html>
