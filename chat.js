@@ -40,10 +40,6 @@ function initChat(user){
     set(typingRef, { username: user.email, typing: messageInput.value.length > 0 });
   });
 
-  sendBtn.addEventListener("click", () => {
-    set(typingRef, null);
-  });
-
   const allTypingRef = ref(db, `matches/${matchId}/typing`);
   onValue(allTypingRef, snapshot => {
     const users = snapshot.val();
@@ -61,11 +57,14 @@ function initChat(user){
   });
 
   // SEND MESSAGE
-  sendBtn.onclick = () => {
+  sendBtn.addEventListener("click", () => {
+
+    set(typingRef, null);
+
     const text = messageInput.value.trim();
     if(text === "") return;
 
-    const newMsgRef = push(messagesRef); // Realtime DB push
+    const newMsgRef = push(messagesRef);
     set(newMsgRef, {
       text: text,
       username: user.email,
@@ -75,7 +74,7 @@ function initChat(user){
     });
 
     messageInput.value = "";
-  };
+  });
 
   // LISTEN FOR MESSAGES IN REAL TIME
   onValue(messagesRef, snapshot => {
