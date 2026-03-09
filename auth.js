@@ -58,3 +58,12 @@ loginForm.addEventListener('submit', async (e) => {
         alert(error.message);
     }
 });
+
+import { auth } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Your UID:", user.uid);
+  }
+});
